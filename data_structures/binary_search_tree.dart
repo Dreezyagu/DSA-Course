@@ -7,7 +7,9 @@ void main(List<String> args) {
   binarySearchTree.insert(170);
   binarySearchTree.insert(15);
   binarySearchTree.insert(1);
-  print(binarySearchTree.breadthFirstSearchR([binarySearchTree.root], []));
+  print(binarySearchTree.DFTInOrder());
+  print(binarySearchTree.DFTPreOrder());
+  print(binarySearchTree.DFTPostOrder());
 }
 
 class BinarySearchTree {
@@ -128,7 +130,56 @@ class BinarySearchTree {
 
     return breadthFirstSearchR(queue, list);
   }
+
+  DFTPreOrder() {
+    return traversePreOrder(root, []);
+  }
+
+  DFTPostOrder() {
+    return traversePostOrder(root, []);
+  }
+
+  DFTInOrder() {
+    return traverseInOrder(root, []);
+  }
 }
+
+traversePreOrder(Node? node, List list) {
+  list.add(node?.value);
+  if (node?.left != null) {
+    traversePreOrder(node?.left, list);
+  }
+  if (node?.right != null) {
+    traversePreOrder(node?.right, list);
+  }
+  return list;
+}
+
+traverseInOrder(Node? node, List list) {
+  if (node?.left != null) {
+    traverseInOrder(node?.left, list);
+  }
+  list.add(node?.value);
+  if (node?.right != null) {
+    traverseInOrder(node?.right, list);
+  }
+  return list;
+}
+
+traversePostOrder(Node? node, List list) {
+  if (node?.left != null) {
+    traversePostOrder(node?.left, list);
+  }
+  if (node?.right != null) {
+    traversePostOrder(node?.right, list);
+  }
+  list.add(node?.value);
+  return list;
+}
+
+//     9
+//  4     20
+//1  6  15  170
 
 class Node {
   int value;
